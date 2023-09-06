@@ -1,8 +1,8 @@
 import todoRepository from "../repositories/todoRepository.js";
 
-const getListData = async (ctx) => {
+const getTodos = (ctx) => {
   try {
-    const allDatas = await todoRepository.getAllData();
+    const allDatas = todoRepository.getTodos();
     if (!allDatas) {
       ctx.status === 404;
       return (ctx.body = {
@@ -25,10 +25,10 @@ const getListData = async (ctx) => {
   }
 };
 
-const addTodos = async (ctx) => {
+const addTodo = (ctx) => {
   try {
     const newTodo = ctx.request.body;
-    const data = await todoRepository.addNewTodo(newTodo);
+    const data = todoRepository.addNewTodo(newTodo);
     ctx.status === 200;
     return (ctx.body = {
       success: true,
@@ -43,29 +43,10 @@ const addTodos = async (ctx) => {
   }
 };
 
-const completeTodo = async (ctx) => {
+const completeTodo = (ctx) => {
   try {
     const { id } = ctx.params;
-    const data = await todoRepository.updateStatusComplete(parseInt(id));
-    ctx.status === 200;
-    return (ctx.body = {
-      success: true,
-      message: "Updated status Completed successfully",
-      data: data,
-    });
-  } catch (error) {
-    ctx.status === 500;
-    ctx.body = {
-      success: false,
-      message: error.message,
-    };
-  }
-};
-
-const undoCompleteTodo = async (ctx) => {
-  try {
-    const { id } = ctx.params;
-    const data = await todoRepository.undoStatusComplete(parseInt(id));
+    const data = todoRepository.updateStatusComplete(parseInt(id));
     ctx.status === 200;
     return (ctx.body = {
       success: true,
@@ -81,10 +62,29 @@ const undoCompleteTodo = async (ctx) => {
   }
 };
 
-const deleteTodo = async (ctx) => {
+const undoCompleteTodo = (ctx) => {
   try {
     const { id } = ctx.params;
-    const data = await todoRepository.removeTodo(parseInt(id));
+    const data = todoRepository.undoStatusComplete(parseInt(id));
+    ctx.status === 200;
+    return (ctx.body = {
+      success: true,
+      message: "Updated status Completed successfully",
+      data: data,
+    });
+  } catch (error) {
+    ctx.status === 500;
+    ctx.body = {
+      success: false,
+      message: error.message,
+    };
+  }
+};
+
+const deleteTodo = (ctx) => {
+  try {
+    const { id } = ctx.params;
+    const data = todoRepository.removeTodo(parseInt(id));
 
     ctx.status === 200;
     return (ctx.body = {
@@ -102,8 +102,8 @@ const deleteTodo = async (ctx) => {
 };
 
 export default {
-  getListData,
-  addTodos,
+  getTodos,
+  addTodo,
   completeTodo,
   undoCompleteTodo,
   deleteTodo,

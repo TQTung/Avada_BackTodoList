@@ -1,10 +1,1 @@
-{
-  "data": [
-    { "text": "check email", "isCompleted": true, "id": 45 },
-    { "text": "learn english ", "isCompleted": false, "id": 2 },
-    { "text": "visit friend on Sunday", "isCompleted": true, "id": 77 },
-    { "text": "have a journey with family", "isCompleted": false, "id": 5 },
-    { "text": "test 123", "isCompleted": false, "id": 63 },
-    { "text": "sdasdas", "isCompleted": false, "id": 79 }
-  ]
-}
+{"data":[{"text":"check email","isCompleted":true,"id":45},{"text":"learn english ","isCompleted":false,"id":2},{"text":"visit friend on Sunday","isCompleted":false,"id":77},{"text":"have a journey with family","isCompleted":true,"id":5},{"text":"test123","isCompleted":false,"id":12},{"text":"have lunch ","isCompleted":false,"id":37}]}

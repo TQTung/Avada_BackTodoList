@@ -3,52 +3,52 @@ import { getDataFromDb, saveDataIntoDb } from "../helpers/getAndSaveData.js";
 
 const allDatas = await getDataFromDb();
 
-const getAllData = async () => {
+const getTodos = () => {
   return allDatas;
 };
 
-const addNewTodo = async (newTodo) => {
+const addNewTodo = (newTodo) => {
   const increasingId = autoIncreasingId(allDatas.map((data) => data.id));
   const newListsData = [...allDatas, { ...newTodo, id: increasingId }];
 
-  await saveDataIntoDb(newListsData);
+  saveDataIntoDb(newListsData);
 
   return newListsData;
 };
 
-const updateStatusComplete = async (id) => {
+const updateStatusComplete = (id) => {
   const newListWhenUpdated = allDatas.map((data) => {
     if (data.id === id) {
       return { ...data, isCompleted: true };
     }
     return data;
   });
-  await saveDataIntoDb(newListWhenUpdated);
+  saveDataIntoDb(newListWhenUpdated);
 
   return newListWhenUpdated;
 };
 
-const undoStatusComplete = async (id) => {
+const undoStatusComplete = (id) => {
   const newListWhenUpdated = allDatas.map((data) => {
     if (data.id === id) {
       return { ...data, isCompleted: false };
     }
     return data;
   });
-  await saveDataIntoDb(newListWhenUpdated);
+  saveDataIntoDb(newListWhenUpdated);
 
   return newListWhenUpdated;
 };
 
-const removeTodo = async (id) => {
+const removeTodo = (id) => {
   const newListThenDelete = allDatas.filter((todo) => todo.id !== id);
 
-  await saveDataIntoDb(newListThenDelete);
+  saveDataIntoDb(newListThenDelete);
   return newListThenDelete;
 };
 
 export default {
-  getAllData,
+  getTodos,
   addNewTodo,
   updateStatusComplete,
   undoStatusComplete,
